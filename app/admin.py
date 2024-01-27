@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
-from app.models import Room, Student
+from app.models import Room, Student, Payment
 
 # Register your models here.
 # change admin site header
@@ -50,3 +50,10 @@ class StudentAdmin(admin.ModelAdmin):
             self.message_user(request, '', level='SUCCESS')
         else:
             super().save_model(request, obj, form, change)
+
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('student', 'from_date', 'to_date', 'amount')
+    list_filter = ('student', 'amount')
+    search_fields = ('student', 'amount')

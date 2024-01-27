@@ -47,3 +47,20 @@ class Student(models.Model):
     class Meta:
         verbose_name = 'Talaba'
         verbose_name_plural = 'Talabalar'
+
+
+class Payment(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Talaba')
+    from_date = models.DateField(verbose_name='To\'lov boshlanishi')
+    to_date = models.DateField(verbose_name='To\'lov tugashi')
+    amount = models.IntegerField(verbose_name='Summa')
+    date = models.DateField(verbose_name='To\'lov sanasi')
+    registered_at = models.DateTimeField(auto_now_add=True, verbose_name='Ro\'yxatga olingan sana')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Yangilangan sana')
+
+    def __str__(self):
+        return f"{self.student} {self.amount} so\'m {self.payment_type}"
+
+    class Meta:
+        verbose_name = 'To\'lov'
+        verbose_name_plural = 'To\'lovlar'
