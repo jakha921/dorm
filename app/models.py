@@ -59,7 +59,7 @@ class Payment(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Yangilangan sana')
 
     def __str__(self):
-        return f"{self.student} {self.amount} so\'m {self.payment_type}"
+        return f"{self.student} {self.amount} so\'m {self.date} sanasida to\'ladi"
 
     class Meta:
         verbose_name = 'To\'lov'

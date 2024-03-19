@@ -34,10 +34,10 @@ class RoomAdmin(admin.ModelAdmin):
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'room', 'phone', 'passport', 'group', 'region', 'address')
-    list_filter = ('room', 'direction', 'faculty', 'course', 'group', 'region')
+    list_filter = ('room__floor', 'room__room_type', 'direction', 'faculty', 'course', 'group', 'region')
     search_fields = (
-        'full_name', 'room', 'phone', 'direction', 'faculty', 'course', 'group', 'passport', 'region', 'address',
-        'diseases')
+        'full_name', 'phone', 'direction', 'faculty', 'course', 'group', 'passport', 'region', 'address',
+        'diseases', 'room__room_number', 'room__floor', 'room__room_type')
 
     def save_model(self, request, obj, form, change):
         room = obj.room
@@ -55,5 +55,9 @@ class StudentAdmin(admin.ModelAdmin):
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('student', 'from_date', 'to_date', 'amount')
-    list_filter = ('student', 'amount')
-    search_fields = ('student', 'amount')
+    list_filter = ('student__room__room_number', 'student__room__floor', 'student__room__room_type', 'from_date',
+                   'to_date', 'student__group', 'student__region', 'student__address')
+    search_fields = ('student__full_name', 'from_date', 'to_date', 'amount', 'student__room__room_number',
+                     'student__room__floor', 'student__room__room_type', 'student__group', 'student__region',
+                     'student__address', 'student__phone', 'student__direction', 'student__faculty', 'student__course',
+                     'student__passport', 'student__diseases')
